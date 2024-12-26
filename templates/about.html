@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/about.css') }}"
+    />
+  </head>
+  <body>
+    <div class="header">
+      <div class="navbar">
+        <div class="logo">Diabetes Detection</div>
+        <div class="menu">
+          <a href="{{ url_for('home') }}">Home</a>
+          <a href="{{ url_for('about') }}">About</a>
+          <a
+            href="https://www.doctorbangladesh.com/endocrinologist-chittagong/"
+            target="_blank"
+            >Contact</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="spacer"></div>
+
+    <div class="container">
+      <div class="profile-cards">
+        <div class="profile-card">
+          <img
+            class="profile-img"
+            src="/static/images/shajib.jpg"
+            alt="Md. Shajib Chowdhury"
+          />
+          <div class="profile-info">
+            <div class="profile-name">
+              <a
+                href="https://mdshajib1.github.io/portfolio/"
+                class="profile-link"
+                >MD. ATAUL ISLAM</a
+              >
+            </div>
+
+            <p class="profile-id">C213107</p>
+          </div>
+        </div>
+        <div class="profile-card">
+          <img
+            class="profile-img"
+            src="/static/images/fazlul.jpg"
+            alt="Muhammad Fazlul Karim"
+          />
+          <div class="profile-info">
+            <div class="profile-name">
+              <a href="#" class="profile-link">Muhammad Fazlul Karim </a>
+            </div>
+
+            <p class="profile-id">C211083R</p>
+          </div>
+        </div>
+        <div class="profile-card">
+          <img
+            class="profile-img"
+            src="/static/images/niloy.jpg"
+            alt="Istiuk Hossain Niloy"
+          />
+          <div class="profile-info">
+            <div class="profile-name">
+              <a
+                href="#"
+                class="profile-link"
+                > Istiuk Hossain Niloy</a
+              >
+            </div>
+            <p class="profile-id">C211089</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="comment-form">
+        <form action="" method="post">
+          <h2 class="form-title">Leave a Comment</h2>
+          <p class="form-description">
+            Your email address will not be published. Required fields are marked
+            *
+          </p>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <textarea
+                id="comment"
+                name="comment"
+                class="form-textarea"
+                placeholder="Type Comment...*"
+                rows="5"
+                required
+              ></textarea>
+            </div>
+            <div class="form-group">
+              <input
+                type="text"
+                id="name"
+                name="name"
+                class="form-input"
+                placeholder="Name*"
+                required
+              />
+
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="form-input"
+                placeholder="Email*"
+                required
+              />
+
+              <input
+                type="text"
+                id="id"
+                name="id"
+                class="form-input"
+                placeholder="Id"
+              />
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="form-button">Send Message →</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="spacer"></div>
+
+    <div class="footer">
+      <p>&copy; 2024 Diabetes Detection System. All rights reserved.</p>
+    </div>
+  </body>
+</html>

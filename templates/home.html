@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <script>
+        function showModal(resultText) {
+            document.getElementById('resultText').innerText = resultText;
+            document.getElementById('resultModal').style.display = "block";
+
+            if (resultText.includes('The result is 1')) {
+                document.getElementById('tipsButton').style.display = "inline-block";
+            } else {
+                document.getElementById('tipsButton').style.display = "none";
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('resultModal').style.display = "none";
+        }
+
+        function goToTips() {
+            window.location.href = "{{ url_for('tips') }}";
+        }
+
+        async function handleDetect(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const data = Array.from(formData.values()).map(value => parseFloat(value));
+
+            const response = await fetch('{{ url_for('predict_api') }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ data: data })
+            });
+
+            const result = await response.json();
+            showModal(result);
+        }
+    </script>
+</head>
+<body>
+    <div class="header">
+        <div class="navbar">
+            <div class="logo">
+                Diabetes Detection
+            </div>
+            <div class="menu">
+                <a href="#">Home</a>
+                <a href="{{ url_for('about') }}">About</a>
+                <a href="https://www.doctorbangladesh.com/endocrinologist-chittagong/" target="_blank">Contact</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="spacer"></div>
+
+    <div class="login">
+        <h1 class="title">Diabetes Detection</h1>
+        <form onsubmit="handleDetect(event)">
+            <div class="factors">
+                <div>
+                    <p>Age</p>
+                    <input type="text" name="Age" placeholder="Enter Age" required />
+                    <p>Gender</p>
+                    <input type="text" name="Gender" placeholder="(male:1,female:0)" required />
+                    <p>Polyuria</p>
+                    <input type="text" name="Polyuria" placeholder="(Yes:1/No:0)" required />
+                    <p>Polydipsia</p>
+                    <input type="text" name="Polydipsia" placeholder="(Yes:1/No:0)" required />
+                </div>
+                <div>
+                    <p>sudden weight loss</p>
+                    <input type="text" name="sudden weight loss" placeholder="(Yes:1/No:0)" required />
+                    <p>weakness</p>
+                    <input type="text" name="weakness" placeholder="(Yes:1/No:0)" required />
+                    <p>Polyphagia</p>
+                    <input type="text" name="Polyphagia" placeholder="(Yes:1/No:0)" required />
+                    <p>Genital thrush</p>
+                    <input type="text" name="Genital thrush" placeholder="(Yes:1/No:0)" required />
+                </div>
+                <div>
+                    <p>visual blurring</p>
+                    <input type="text" name="visual blurring" placeholder="(Yes:1/No:0)" required />
+                    <p>Itching</p>
+                    <input type="text" name="Itching" placeholder="(Yes:1/No:0)" required />
+                    <p>Irritability</p>
+                    <input type="text" name="Irritability" placeholder="(Yes:1/No:0)" required />
+                    <p>delayed healing</p>
+                    <input type="text" name="delayed healing" placeholder="(Yes:1/No:0)" required />
+                </div>
+                <div>
+                    <p>partial paresis</p>
+                    <input type="text" name="partial paresis" placeholder="(Yes:1/No:0)" required />
+                    <p>muscle stiffness</p>
+                    <input type="text" name="muscle stiffness" placeholder="(Yes:1/No:0)" required />
+                    <p>Alopecia</p>
+                    <input type="text" name="Alopecia" placeholder="(Yes:1/No:0)" required />
+                    <p>Obesity</p>
+                    <input type="text" name="Obesity" placeholder="(Yes:1/No:0)" required />
+                </div>
+            </div>
+            <button type="submit">Detect</button>
+        </form>
+    </div>
+
+    <div class="spacer"></div>
+
+    <div class="footer">
+        <p>&copy; 2024 Diabetes Detection System. All rights reserved.</p>
+    </div>
+
+    <div id="resultModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <p id="resultText">Result will be displayed here</p>
+            <button id="tipsButton" style="display: none;" onclick="goToTips()">Show Tips</button>
+            <button id="tipsButton" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+</body>
+</html>
